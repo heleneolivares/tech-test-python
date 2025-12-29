@@ -25,10 +25,11 @@ GET /api/portfolios/<portfolio_id>/snapshot/?date=YYYY-MM-DD
 
 ## Ejecutar el proyecto
 
+```bash
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py load_data
 python manage.py runserver
-
+```
