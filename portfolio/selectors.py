@@ -10,9 +10,9 @@ from portfolio.models import Asset, AssetPrice, Portfolio, PortfolioPosition
 def get_portfolio(*, portfolio_id: int) -> Portfolio:
     return Portfolio.objects.get(id=portfolio_id)
 
-def get_portfolio_positions(*, portfolio_id_: int) -> QuerySet[PortfolioPosition]:
+def get_portfolio_positions(*, portfolio_id: int) -> QuerySet[PortfolioPosition]:
     return (
-        PortfolioPosition.objects.filter(portfolio_id_=portfolio_id_)
+        PortfolioPosition.objects.filter(portfolio_id=portfolio_id)
         .select_related("asset")
         .order_by("asset__ticker")
     )
@@ -25,7 +25,7 @@ def get_prices_assets(
  ) -> QuerySet[AssetPrice]:
     return (
         AssetPrice.objects.filter(
-            Asset__in=list(assets),
+            asset__in=list(assets),
             date__range=(start_date, end_date),
         )
         .select_related("asset")
